@@ -39,9 +39,35 @@ from scipy.signal import find_peaks
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "PASTE_YOUR_WEBHOOK_URL_HERE")
 
 TICKERS = [
-    "TSLA", "AAPL", "NVDA", "MSFT", "AMZN", "GOOGL", "META", "NFLX",
-    "AMD", "AVGO", "CRM", "ADBE", "JPM", "BAC", "XOM", "CVX",
-    "SPY", "QQQ", "COIN", "PLTR",
+    # Mega-cap tech
+    "AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "TSLA",
+
+    # Semis
+    "AMD", "AVGO", "QCOM", "MU", "TXN", "INTC",
+
+    # Software / Cloud
+    "CRM", "ADBE", "ORCL", "NOW", "PANW", "SNOW",
+
+    # Financials
+    "JPM", "BAC", "GS", "MS", "WFC", "V", "MA",
+
+    # Healthcare
+    "UNH", "LLY", "JNJ", "PFE", "ABBV", "MRK",
+
+    # Energy
+    "XOM", "CVX", "COP", "SLB",
+
+    # Consumer / Retail
+    "WMT", "COST", "HD", "NKE", "SBUX", "MCD",
+
+    # Industrials
+    "BA", "CAT", "GE", "HON",
+
+    # High-beta / momentum
+    "COIN", "PLTR", "SOFI", "RIVN", "SMCI",
+
+    # ETFs (benchmarks)
+    "SPY", "QQQ", "IWM",
 ]
 
 OSCILLATOR = "tsi"        # "tsi" or "rsi"

@@ -1,0 +1,40 @@
+name: Ticker Alert Scanner
+
+on:
+  schedule:
+    # Runs at minute 5 of every hour (5 min after the bar closes, gives
+    # yfinance time to have the latest 1h candle fully finalized).
+    # GitHub's scheduler can lag a few minutes during high load - that's normal.
+    - cron: "5 * * * *"
+  workflow_dispatch:   # lets you manually trigger a run from the Actions tab, for testing
+
+permissions:
+  contents: write   # needed so the workflow can commit the updated alert_state.json back
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install yfinance scipy pandas numpy requests
+
+      - name: Run scanner
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python ticker_alert_scanner.py
+
+      - name: Commit updated alert state
+        run: |
+          git config user.name "alert-scanner-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add alert_state.json
+          git diff --staged --quiet || git commit -m "Update alert state [skip ci]"
+          git push

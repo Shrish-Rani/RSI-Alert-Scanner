@@ -40,7 +40,8 @@ DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "PASTE_YOUR_WEBHOOK_
 
 TICKERS = [
     "TSLA", "AAPL", "NVDA", "MSFT", "AMZN", "GOOGL", "META", "NFLX",
-    # add up to 50-100+ tickers here
+    "AMD", "AVGO", "CRM", "ADBE", "JPM", "BAC", "XOM", "CVX",
+    "SPY", "QQQ", "COIN", "PLTR",
 ]
 
 OSCILLATOR = "tsi"        # "tsi" or "rsi"
